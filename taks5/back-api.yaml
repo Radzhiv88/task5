@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.20.0 (f3d54d784)
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{"kompose.cmd":"kompose convert -f docker-compose.yml","kompose.version":"1.20.0 (f3d54d784)"},"creationTimestamp":"2021-07-19T17:29:49Z","labels":{"io.kompose.service":"back"},"name":"api","namespace":"default","resourceVersion":"1537544","selfLink":"/api/v1/namespaces/default/services/back","uid":"49375d21-579c-42df-951c-b5a98096687c"},"spec":{"clusterIP":"10.100.228.250","ports":[{"name":"3000","port":3000,"protocol":"TCP","targetPort":3000}],"selector":{"io.kompose.service":"back"},"sessionAffinity":"None","type":"ClusterIP"},"status":{"loadBalancer":{}}}
+  creationTimestamp: "2021-07-19T18:01:01Z"
+  labels:
+    io.kompose.service: back
+  name: api
+  namespace: default
+  resourceVersion: "1542474"
+  selfLink: /api/v1/namespaces/default/services/api
+  uid: 9c58ce7a-f3ae-437e-9807-2c5999e94425
+spec:
+  clusterIP: 10.100.228.250
+  ports:
+  - name: "3000"
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    io.kompose.service: back
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

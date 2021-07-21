@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.20.0 (f3d54d784)
+  labels:
+    io.kompose.service: data
+  name: data
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.network/myapp: "true"
+      io.kompose.service: data
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yml
+        kompose.version: 1.20.0 (f3d54d784)
+      labels:
+        io.kompose.network/myapp: "true"
+        io.kompose.service: data
+    spec:
+      containers:
+      - image: radzhiv/data:v1
+        name: data
+        ports:
+        - containerPort: 3306
+        envFrom:
+        - secretRef:
+            name: data-secret
+        volumeMounts:
+          - mountPath: "/var/lib/mysql"
+            name: pv-volume
+      volumes:
+      - name: pv-volume
+        persistentVolumeClaim:
+          claimName: pv-claim
+          
